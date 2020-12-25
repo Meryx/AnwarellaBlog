@@ -5,6 +5,11 @@ import "./about.css";
 
 const About = () => (
   <Layout>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>About!</title>
+      <link rel="canonical" href="https://anwarellablog.me/About" />
+    </Helmet>
     <div className="about">
       <h1>About</h1>
       <Nav />

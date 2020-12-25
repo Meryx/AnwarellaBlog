@@ -16,6 +16,11 @@ export default function Template({ data, pageContext }) {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Anwarellablog</title>
+        <link rel="canonical" href="https://anwarellablog.me" />
+      </Helmet>
       <div className="blogs">
         <div className="header">
           <h1>Blogs by Anwar</h1>
