@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Nav from "../components/Nav";
 import "./about.css";
+import { Helmet } from "react-helmet"
 
 const About = () => (
   <Layout>

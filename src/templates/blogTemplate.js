@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby";
 import Nav from '../components/Nav';
 import Layout from "../components/Layout";
 import "./blogTemplate.css";
+import { Helmet } from "react-helmet"
 
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 deckDeckGoHighlightElement();

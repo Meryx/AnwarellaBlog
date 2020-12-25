@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import Nav from '../components/Nav'
 import Post from '../components/Post'
 import "./blog-posts-list-template.css";
+import { Helmet } from "react-helmet"
 
 
 export default function Template({ data, pageContext }) {
