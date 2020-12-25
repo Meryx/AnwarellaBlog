@@ -19,7 +19,6 @@ export default function Template({ data, pageContext }) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Anwarellablog</title>
-        <link rel="canonical" href="https://anwarellablog.me" />
       </Helmet>
       <div className="blogs">
         <div className="header">
