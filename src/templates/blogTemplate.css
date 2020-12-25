@@ -1,0 +1,52 @@
+.blogTemplate .blogTemplate-title {
+  font-size: 3em;
+  color: #3bba9c;
+}
+
+h1, h2, h3, h4, h5, h6{
+  color: #3bba9c;
+}
+
+.blogTemplate .blogTemplate-posted-by {
+  font-size: 1.2em;
+}
+
+
+.blogPost{
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 100px;
+  color: white;
+}
+
+.blogTemplate {
+  text-align: left;
+  margin-bottom: 80px;
+  padding: 40px;
+  background-color: #2e3047;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.header {
+  color: white;
+}
+
+#nextPost, #prevPost {
+  background-color: black;
+  color: #ffffff;
+  padding: 16px 24px;
+  text-decoration: none;
+  margin-top: 50px;
+}
+
+#nextPost {
+  float: right;
+
+}
+
+#prevPost {
+  float: left;
+}

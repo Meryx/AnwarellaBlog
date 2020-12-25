@@ -1,0 +1,30 @@
+.blogs {
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+#prev, #next {
+  background-color: black;
+  color: #ffffff;
+  padding: 16px 24px;
+  text-decoration: none;
+  margin-top: 50px;
+}
+
+#prev {
+  float: right;
+
+}
+
+#next {
+  float: left;
+}
+
+
+.header {
+  color: white;
+}
