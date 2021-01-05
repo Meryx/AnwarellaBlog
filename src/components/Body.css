@@ -1,0 +1,13 @@
+.container {
+  font-size: 1.3rem;
+  text-align: left;
+  margin-bottom: 80px;
+  padding: 40px;
+  background-color: #2e3047;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.container a {
+  color: #3bba9c;
+}

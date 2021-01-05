@@ -1,18 +1,16 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
-import Nav from '../components/Nav'
 import Post from '../components/Post'
 import "./blog-posts-list-template.css";
 import { Helmet } from "react-helmet"
-
+import Header from '../components/Header';
 
 export default function Template({ data, pageContext }) {
   const isFirst = pageContext.currentPage === 1;
   const isLast = pageContext.currentPage === pageContext.numPages
   const prevPage = pageContext.currentPage  - 1 === 1 ? "/" : (pageContext.currentPage  - 1).toString()
   const nextPage = (pageContext.currentPage  + 1).toString()
-  console.log(nextPage);
 
 
   return (
@@ -22,37 +20,37 @@ export default function Template({ data, pageContext }) {
         <title>Anwarellablog</title>
       </Helmet>
       <div className="blogs">
-        <div className="header">
-          <h1>Blogs by Anwar</h1>
-          <Nav />
+        <Header title="Blogs by Anwar" />
+
+        <div>
+          {
+
+            data.allMarkdownRemark.edges.map(post => {
+              const { title, author, date, description, path } = post.node.frontmatter;
+
+              return (
+                <Post
+                  title={title}
+                  author={author}
+                  date={date}
+                  description={description}
+                  key={`${date}__${title}`}
+                  path={path}
+                />
+              )
+            })
+          }
+          {!isFirst && (
+            <Link to={prevPage} rel="prev" id="prev">
+              Next Page →
+            </Link>
+          )}
+          {!isLast && (
+            <Link to={nextPage} rel="next" id="next">
+              ← Previous Page
+            </Link>
+          )}
         </div>
-        {
-
-          data.allMarkdownRemark.edges.map(post => {
-            const { title, author, date, description, path } = post.node.frontmatter;
-
-            return (
-              <Post
-                title={title}
-                author={author}
-                date={date}
-                description={description}
-                key={`${date}__${title}`}
-                path={path}
-              />
-            )
-          })
-        }
-        {!isFirst && (
-          <Link to={prevPage} rel="prev" id="prev">
-            Next Page →
-          </Link>
-        )}
-        {!isLast && (
-          <Link to={nextPage} rel="next" id="next">
-            ← Previous Page
-          </Link>
-        )}
 
       </div>
     </Layout>

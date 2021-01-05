@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import Nav from '../components/Nav';
 import Layout from "../components/Layout";
 import "./blogTemplate.css";
-import { Helmet } from "react-helmet"
+import { Helmet } from "react-helmet";
+import Header from '../components/Header';
 
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 deckDeckGoHighlightElement();
@@ -21,10 +21,8 @@ export default function Template({ data, pageContext }) {
         <title>{ title }</title>
       </Helmet>
       <div className="blogPost">
-        <div className="header">
-          <h1>Blogs by Anwar</h1>
-          <Nav />
-        </div>
+
+        <Header title="Blogs by Anwar"/>
         <div className='blogTemplate'>
           <h1 className="blogTemplate-title">{ title }</h1>
           <p className='blogTemplate-posted-by'>Posted by { author } on { date }</p>

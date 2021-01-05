@@ -1,7 +1,7 @@
 ---
 path: '/java-nextLine-problem'
-date: '2020-12-25'
-title: 'The Solution to the Scanner.nextLine problem'
+date: '25 December 2020'
+title: 'The Solution to the Scanner.nextLine Problem'
 author: 'Anwar Haredy'
 description: 'Prevent Scanner.nextLine from being consumed with this one simple trick!'
 ---
@@ -13,7 +13,7 @@ When pressing "Enter" to feed your program an input via `Scanner.next()` or any 
 Now, the next time `Scanner.nextLine()` is called, it consumes the "\n" character instead and appears to be entirely skipped.
 
 ##The solution
-One way to solve this problem is to simply use an additional `Scanenr.nextLine()` after every `Scanner.next()` call.
+One way to solve this problem is to simply use an additional `Scanner.nextLine()` after every `Scanner.next()` call.
 
 ```java
 Scanner input = new Scanner(System.in);

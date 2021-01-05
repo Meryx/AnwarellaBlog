@@ -1,35 +1,26 @@
 .blogTemplate .blogTemplate-title {
-  font-size: 3em;
-  color: #3bba9c;
-}
-
-h1, h2, h3, h4, h5, h6{
-  color: #3bba9c;
+  font-size: 2.2rem;
 }
 
 .blogTemplate .blogTemplate-posted-by {
-  font-size: 1.2em;
+  font-size: 1.2rem;
 }
 
 
-.blogPost{
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 100px;
-  color: white;
-}
+
 
 .blogTemplate {
   text-align: left;
   margin-bottom: 80px;
-  padding: 40px;
+  padding: 4%;
   background-color: #2e3047;
-  border-radius: 15px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
-.header {
-  color: white;
+.blogTemplate p {
+  margin-bottom: 20px;
+  text-rendering: optimizeLegibility;
 }
 
 #nextPost, #prevPost {
