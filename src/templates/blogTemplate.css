@@ -20,7 +20,12 @@
 
 .blogTemplate p {
   margin-bottom: 20px;
-  text-rendering: optimizeLegibility;
+  font-size: 1.2rem;
+}
+
+.blogTemplate ul {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
 }
 
 #nextPost, #prevPost {
