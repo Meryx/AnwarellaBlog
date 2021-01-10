@@ -14,6 +14,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-sharp`,
+
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -24,6 +25,9 @@ module.exports = {
               terminal: 'carbon',
               theme: 'blackboard'
             }
+          },
+          {
+            resolve: `gatsby-remark-images`,
           },
         ],
       },

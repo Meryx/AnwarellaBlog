@@ -18,6 +18,10 @@
   overflow: hidden;
 }
 
+.blogTemplate a {
+  color: #3bba9c;
+}
+
 .blogTemplate p {
   margin-bottom: 20px;
   font-size: 1.2rem;
