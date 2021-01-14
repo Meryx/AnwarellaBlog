@@ -1,6 +1,7 @@
 ---
 path: '/java-nextLine-problem'
 date: '25 December 2020'
+sortDate: 2020/12/25
 title: 'The Solution to the Scanner.nextLine Problem'
 author: 'Anwar Haredy'
 description: 'Prevent Scanner.nextLine from being consumed with this one simple trick!'

@@ -16,7 +16,7 @@ exports.createPages = ({ actions, graphql }) => {
   return graphql(`
     {
       allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { fields: [frontmatter___sortDate], order: DESC }
       ) {
         edges {
           node {
@@ -36,11 +36,11 @@ exports.createPages = ({ actions, graphql }) => {
       let prevPost = undefined;
       let nextPost = undefined;
       if(index > 0){
-        prevPost = posts[index - 1].node.frontmatter.path;
+        nextPost = posts[index - 1].node.frontmatter.path;
       }
 
       if(index < posts.length - 1){
-        nextPost = posts[index + 1].node.frontmatter.path;
+        prevPost = posts[index + 1].node.frontmatter.path;
       }
       createPage({
         path: edge.node.frontmatter.path,

@@ -1,6 +1,7 @@
 ---
 path: '/vacuum-cleaner-world'
 date: '10 January 2021'
+sortDate: 2021/1/10
 title: 'Vacuum Cleaner World'
 author: 'Anwar Haredy'
 description: 'How I tackled a simple problem with depth-first search.'

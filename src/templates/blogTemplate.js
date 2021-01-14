@@ -28,13 +28,13 @@ export default function Template({ data, pageContext }) {
           <p className='blogTemplate-posted-by'>Posted by { author } on { date }</p>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           {nextPost && (
-            <Link to={nextPost} rel="prev" id="prevPost">
-              ← Previous Post
+            <Link to={nextPost} rel="next" id="nextPost">
+               Next Post →
             </Link>
           )}
           {prevPost && (
-            <Link to={prevPost} rel="next" id="nextPost">
-              Next Post →
+            <Link to={prevPost} rel="prev" id="prevPost">
+              ← Previous Post
             </Link>
           )}
         </div>

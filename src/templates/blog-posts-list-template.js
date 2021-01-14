@@ -60,7 +60,7 @@ export default function Template({ data, pageContext }) {
 export const AllBlogsQuery = graphql`
   query AllBlogPosts($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___sortDate], order: DESC }
       limit: $limit
       skip: $skip
     ) {
@@ -72,6 +72,7 @@ export const AllBlogsQuery = graphql`
             description
             author
             path
+            sortDate
           }
         }
       }
