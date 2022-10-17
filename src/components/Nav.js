@@ -5,12 +5,12 @@ import "./nav.css";
 
 const Nav = () => (
   <>
-    <p id="header-in-nav"><span id="header-desc">[Programming, student life, personal opinions]</span> from Anwar Haredy</p>
+    <p id="header-in-nav"><span id="header-desc">[Programming, GradSchool, Personal Opinions]</span> from Anwar Haredy</p>
     <nav className="nav">
       <ul className="nav-list">
         <li className="nav-list-item">
           <Link
-  	        to="/">
+            to="/">
             Home
           </Link>
         </li>
@@ -18,7 +18,7 @@ const Nav = () => (
           <Link
             to="/About">
             About
-         </Link>
+          </Link>
         </li>
       </ul>
     </nav>
