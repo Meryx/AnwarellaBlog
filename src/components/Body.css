@@ -11,3 +11,59 @@
 .container a {
   color: #3bba9c;
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px
+}
+
+.col {
+  flex: 0 0 33.33333333%;
+  max-width: 33.33333333%;
+  margin-right: 50px;
+  align-items: center;
+}
+
+.portrait {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+ul.network-icon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.network-icon {
+  margin-top: 30px;
+}
+
+.network-icon li {
+  margin-right: 10px;
+}
+
+.network-icon li:last-of-type {
+  margin-right: 0;
+}
+
+.network-icon li:hover {
+  transform: scale(1.2);
+}
+
+.fas {
+  font-weight: 900;
+}
+
+.big-icon {
+  font-size: 2rem;
+}

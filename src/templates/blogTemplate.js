@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import "./blogTemplate.css";
 import { Helmet } from "react-helmet";
 import Header from '../components/Header';
+import "katex/dist/katex.min.css";
 
 import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
 deckDeckGoHighlightElement();
@@ -18,18 +19,18 @@ export default function Template({ data, pageContext }) {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{ title }</title>
+        <title>{title}</title>
       </Helmet>
       <div className="blogPost">
 
-        <Header title="Blogs by Anwar"/>
+        <Header title="Blogs by Anwar" />
         <div className='blogTemplate'>
-          <h1 className="blogTemplate-title">{ title }</h1>
-          <p className='blogTemplate-posted-by'>Posted by { author } on { date }</p>
+          <h1 className="blogTemplate-title">{title}</h1>
+          <p className='blogTemplate-posted-by'>Posted by {author} on {date}</p>
           <div dangerouslySetInnerHTML={{ __html: post.html }} />
           {nextPost && (
             <Link to={nextPost} rel="next" id="nextPost">
-               Next Post →
+              Next Post →
             </Link>
           )}
           {prevPost && (

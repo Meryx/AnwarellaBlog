@@ -5,12 +5,14 @@ import Post from '../components/Post'
 import "./blog-posts-list-template.css";
 import { Helmet } from "react-helmet"
 import Header from '../components/Header';
+import "katex/dist/katex.min.css";
+
 
 export default function Template({ data, pageContext }) {
   const isFirst = pageContext.currentPage === 1;
   const isLast = pageContext.currentPage === pageContext.numPages
-  const prevPage = pageContext.currentPage  - 1 === 1 ? "/" : (pageContext.currentPage  - 1).toString()
-  const nextPage = (pageContext.currentPage  + 1).toString()
+  const prevPage = pageContext.currentPage - 1 === 1 ? "/" : (pageContext.currentPage - 1).toString()
+  const nextPage = (pageContext.currentPage + 1).toString()
 
 
   return (
