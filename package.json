@@ -27,7 +27,7 @@
     "remark-math": "^5.1.1"
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.8.1"
   },
   "keywords": [
     "gatsby"

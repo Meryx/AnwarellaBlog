@@ -6,28 +6,30 @@
 
 // You can delete this file if you're not using it
 
-const path = require("path");
+const path = require('path');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
-  const postTemplate = path.resolve("src/templates/blogTemplate.js");
-  const blogListTemplate = path.resolve("src/templates/blog-posts-list-template.js")
+  const postTemplate = path.resolve('src/templates/blogTemplate.js');
+  const blogListTemplate = path.resolve(
+    'src/templates/blog-posts-list-template.js'
+  );
 
   return graphql(`
-  {
-    allMarkdownRemark(sort: {frontmatter: {sortDate: DESC}}) {
-      edges {
-        node {
-          frontmatter {
-            path
+    {
+      allMarkdownRemark(sort: { frontmatter: { sortDate: DESC } }) {
+        edges {
+          node {
+            frontmatter {
+              path
+            }
           }
         }
       }
     }
-  }
-  `).then(res => {
+  `).then((res) => {
     if (res.errors) {
-      return Promise.reject(res.errors)
+      return Promise.reject(res.errors);
     }
     const posts = res.data.allMarkdownRemark.edges;
     posts.forEach((edge, index) => {
@@ -48,7 +50,7 @@ exports.createPages = ({ actions, graphql }) => {
           prevPost: prevPost,
           index: index,
           post: posts[index].node,
-          path_variable: edge.node.frontmatter.path
+          path_variable: edge.node.frontmatter.path,
         },
       });
     });
@@ -67,9 +69,5 @@ exports.createPages = ({ actions, graphql }) => {
         },
       });
     });
-
-
-
-
-  })
+  });
 };

@@ -6,11 +6,10 @@ title: 'The Solution to the Scanner.nextLine Problem'
 author: 'Anwar Haredy'
 description: 'Prevent Scanner.nextLine from being consumed with this one simple trick!'
 ---
+
 <h2>The problem</h2>
 
-
 After you use a `Scanner.next()` in a Java console program, the next `Scanner.nextLine()` method appears to be skipped entirely when running the program.
-
 
 <h2>The cause</h2>
 
@@ -33,8 +32,8 @@ String fullName = input.nextLine()
 This will force the first instance of nextLine to consume the additional
 "\n" character and free the other one to do its job. However, there are two problems with this solution.
 
-* It does not look pleasant or elegant.
-* It may create problems if you are using loops in your program.
+- It does not look pleasant or elegant.
+- It may create problems if you are using loops in your program.
 
 The best solution in my opinion is to use `Scanner.nextLine()` to read every single input in your program. And then just parse as required.
 

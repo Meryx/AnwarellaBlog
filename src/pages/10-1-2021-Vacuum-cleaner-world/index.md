@@ -9,7 +9,7 @@ description: 'How I tackled a simple problem with depth-first search.'
 
 <h2>Introduction</h2>
 
-I was reading *Artificial Intelligence: A Modern Approach*, an introductory book
+I was reading _Artificial Intelligence: A Modern Approach_, an introductory book
 about the field of AI and its fundamentals and reached a certain programming exercise
 which I then tried to solve.
 
@@ -23,23 +23,20 @@ as possible cleaning all dirt etc).
 
 Finally, the cleaner must return to its starting cell.
 
-
 <h2>My attempt?</h2>
 
 I struggled to come up with a solution that acts like a **real** AI (i.e
-makes decisions based on *precepts*). But I thought it would still be fun
+makes decisions based on _precepts_). But I thought it would still be fun
 to program the environment and solve it in any way.
 
-I realized that an (N * N) grid (or any grid really) can be thought of as a graph.
+I realized that an (N \* N) grid (or any grid really) can be thought of as a graph.
 Each cell is a node that is connected to its four adjacent nodes (top, down, left, right).
-
 
 <h2>My solution</h2>
 
 I implemented a simple depth-first search algorithm with the above realization in mind.
 And then for fun I visualized the solution on an HTML page using React, which was NOT the tool
 for the job but was fun nonetheless.
-
 
 <h2>Implementation</h2>
 

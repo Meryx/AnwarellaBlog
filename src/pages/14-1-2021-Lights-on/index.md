@@ -17,6 +17,7 @@ Upon first glance I had known it could be solved algorithmically, so I had decid
 to take some time off the game and try and write a program to do it for me. Unfortunately,
 after some thirty minutes of trying, I had not managed to come up with an algorithm to solve it
 and had proceeded to solve it manually.
+
 </p>
 
 Two days ago, however, I was reading about a class of problems called "single-state problems".
@@ -40,8 +41,9 @@ is completely meaningless in a solution. All it does is negate the effect of cli
 and therefore a proper solution would never involve clicking the same tile twice.
 
 I then thought of the problem like:
-* For my first move, I can choose one of 9 tiles...
-* Then for my second move, the first tile is now off limits so 8 options...
+
+- For my first move, I can choose one of 9 tiles...
+- Then for my second move, the first tile is now off limits so 8 options...
 
 I am sure you see where this is going. An exhaustive search solution in the order of
 $O(n!)$. Obviously this was very dumb as the order in which you click the tiles in does not matter.
@@ -53,10 +55,10 @@ We can cut the solutions in half and end with a complexity of $O(2^{n-1})$.
 However, there remains the problem of actually confirming the solution once its found. I came up with a simple way to check the correctness
 of solutions:
 
-* Represent the tiles in a bit-array, 1 means clicked, 0 not clicked.
-* Traverse every tile in whatever order you like.
-* At each tile, add up the 1's in the tile plus the 1's in its adjacent squares.
-* Take that sum and apply modulo 2
+- Represent the tiles in a bit-array, 1 means clicked, 0 not clicked.
+- Traverse every tile in whatever order you like.
+- At each tile, add up the 1's in the tile plus the 1's in its adjacent squares.
+- Take that sum and apply modulo 2
 
 Now if the answer to that operation is 0 you know your solution is wrong, as a lit tile should
 either be toggled once, three times, five times, etc to be still on. A tile that is toggled in the multiples of
