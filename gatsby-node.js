@@ -14,32 +14,30 @@ exports.createPages = ({ actions, graphql }) => {
   const blogListTemplate = path.resolve("src/templates/blog-posts-list-template.js")
 
   return graphql(`
-    {
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___sortDate], order: DESC }
-      ) {
-        edges {
-          node {
-            frontmatter {
-              path
-            }
+  {
+    allMarkdownRemark(sort: {frontmatter: {sortDate: DESC}}) {
+      edges {
+        node {
+          frontmatter {
+            path
           }
         }
+      }
     }
   }
   `).then(res => {
     if (res.errors) {
-      return  Promise.reject(res.errors)
+      return Promise.reject(res.errors)
     }
     const posts = res.data.allMarkdownRemark.edges;
     posts.forEach((edge, index) => {
       let prevPost = undefined;
       let nextPost = undefined;
-      if(index > 0){
+      if (index > 0) {
         nextPost = posts[index - 1].node.frontmatter.path;
       }
 
-      if(index < posts.length - 1){
+      if (index < posts.length - 1) {
         prevPost = posts[index + 1].node.frontmatter.path;
       }
       createPage({
@@ -50,6 +48,7 @@ exports.createPages = ({ actions, graphql }) => {
           prevPost: prevPost,
           index: index,
           post: posts[index].node,
+          path_variable: edge.node.frontmatter.path
         },
       });
     });

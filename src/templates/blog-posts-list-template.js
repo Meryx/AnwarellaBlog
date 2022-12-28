@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import Post from '../components/Post'
 import "./blog-posts-list-template.css";
-import { Helmet } from "react-helmet"
 import Header from '../components/Header';
 import "katex/dist/katex.min.css";
 
@@ -17,10 +16,6 @@ export default function Template({ data, pageContext }) {
 
   return (
     <Layout>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Anwarellablog</title>
-      </Helmet>
       <div className="blogs">
         <Header title="Blogs by Anwar" />
 
@@ -60,24 +55,33 @@ export default function Template({ data, pageContext }) {
 };
 
 export const AllBlogsQuery = graphql`
-  query AllBlogPosts($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___sortDate], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          frontmatter {
-            date
-            title
-            description
-            author
-            path
-            sortDate
-          }
+query AllBlogPosts($skip: Int!, $limit: Int!) {
+  allMarkdownRemark(
+    sort: {frontmatter: {sortDate: DESC}}
+    limit: $limit
+    skip: $skip
+  ) {
+    edges {
+      node {
+        frontmatter {
+          date
+          title
+          description
+          author
+          path
+          sortDate
         }
       }
     }
   }
+}
 `
+
+export function Head() {
+  return (
+    <>
+      <meta charSet="utf-8" />
+      <title>About!</title>
+    </>
+  )
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { Helmet } from "react-helmet";
 import Header from '../components/Header';
 import Body from '../components/Body';
 import { StaticImage } from "gatsby-plugin-image";
@@ -10,12 +9,6 @@ import { IconContext } from "react-icons";
 const About = () => (
 
   <Layout>
-
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>About!</title>
-    </Helmet>
-
     <Header title="About" />
 
     <IconContext.Provider value={{ size: "2em" }}>
@@ -53,3 +46,11 @@ const About = () => (
 );
 
 export default About;
+export function Head() {
+  return (
+    <>
+      <meta charSet="utf-8" />
+      <title>About!</title>
+    </>
+  )
+}

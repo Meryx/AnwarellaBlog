@@ -2,14 +2,14 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import Layout from "../components/Layout";
 import "./blogTemplate.css";
-import { Helmet } from "react-helmet";
 import Header from '../components/Header';
 import "katex/dist/katex.min.css";
 
-import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
-deckDeckGoHighlightElement();
+// import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
+// deckDeckGoHighlightElement();
 
 export default function Template({ data, pageContext }) {
+  console.log(data)
   const post = data.markdownRemark;
   const { title, author, date } = post.frontmatter;
   const nextPost = pageContext.nextPost;
@@ -17,10 +17,6 @@ export default function Template({ data, pageContext }) {
 
   return (
     <Layout>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{title}</title>
-      </Helmet>
       <div className="blogPost">
 
         <Header title="Blogs by Anwar" />
@@ -45,8 +41,8 @@ export default function Template({ data, pageContext }) {
 };
 
 export const postQuery = graphql`
-  query BlogPost($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path }}) {
+  query BlogPost($path_variable: String!) {
+    markdownRemark(frontmatter: { path: { eq: $path_variable }}) {
       frontmatter {
         author
         date
@@ -57,3 +53,12 @@ export const postQuery = graphql`
     }
   }
 `;
+
+export function Head() {
+  return (
+    <>
+      <meta charSet="utf-8" />
+      <title>About!</title>
+    </>
+  )
+}
