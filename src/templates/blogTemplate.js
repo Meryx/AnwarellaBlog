@@ -9,7 +9,6 @@ import 'katex/dist/katex.min.css';
 // deckDeckGoHighlightElement();
 
 export default function Template({ data, pageContext }) {
-  console.log(data);
   const post = data.markdownRemark;
   const { title, author, date } = post.frontmatter;
   const nextPost = pageContext.nextPost;

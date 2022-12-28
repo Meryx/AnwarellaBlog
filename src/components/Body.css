@@ -26,6 +26,30 @@
   align-items: center;
 }
 
+.col2 {
+  flex: 0 0 60.0%;
+  max-width: 60.0%;
+  margin-right: 0px;
+  align-items: center;
+}
+
+@media (max-width: 660px) {
+  /* styles for screens with a maximum width of 600 pixels */
+  .col {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-right: 50px;
+    align-items: center;
+  }
+  
+  .col2 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-right: 50px;
+    align-items: center;
+  }
+}
+
 .portrait {
   width: 200px;
   height: 200px;
