@@ -8,7 +8,6 @@ import { IconContext } from 'react-icons';
 
 const About = ({ data, pageContext }) => {
   const resumeURL = pageContext.resume;
-  console.log(resumeURL);
   return (
     <Layout>
       <Header title="About" />
