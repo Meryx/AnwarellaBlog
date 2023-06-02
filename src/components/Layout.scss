@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-rendering: optimizeLegibility;
+  padding: 3rem 4rem 1rem 4rem;
+  margin: 6rem auto;
+  max-width: 800px;
+  background-color: $secondary-color;
+  box-sizing: border-box;
+
+  // Responsive breakpoints
+  @media (max-width: 992px) {
+    max-width: 720px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 640px;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  @media (max-width: 576px) {
+    max-width: 100%;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+}

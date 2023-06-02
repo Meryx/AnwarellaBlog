@@ -1,15 +1,17 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "anwarellablog",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Private Blog",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Anwar Haredy <anwar.haredy@kaust.edu.sa>",
   "dependencies": {
     "gatsby": "^5.0.0",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-manifest": "^5.0.0",
     "gatsby-plugin-offline": "^6.0.0",
     "gatsby-plugin-postcss": "^6.0.0",
+    "gatsby-plugin-sass": "^6.10.0",
     "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-remark-images": "^7.0.0",
     "gatsby-remark-katex": "^7.0.0",
@@ -18,21 +20,13 @@
     "gatsby-transformer-remark": "^6.0.0",
     "gatsby-transformer-sharp": "^5.0.0",
     "prismjs": "^1.22.0",
-    "prop-types": "^15.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
     "react-icons": "^4.6.0",
     "rehype-katex": "^6.0.2",
-    "remark-math": "^5.1.1"
+    "remark-math": "^5.1.1",
+    "sass": "^1.62.1"
   },
-  "devDependencies": {
-    "prettier": "^2.8.1"
-  },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -44,9 +38,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/Meryx/AnwarellaBlog"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  "overrides": {
+    "react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825": {
+      "react": "^18.2.0"
+    }
   }
 }

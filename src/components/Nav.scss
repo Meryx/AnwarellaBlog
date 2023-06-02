@@ -1,6 +1,7 @@
 .nav {
-  padding: 24px;
-  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 .nav-list {
@@ -11,7 +12,7 @@
 }
 
 .nav-list-item {
-  margin-right: 24px;
+  margin-right: 1.5rem;
 }
 
 .nav-list a {
@@ -22,16 +23,5 @@
 }
 
 .nav-list a:hover {
-  border-bottom: 2px solid #3bba9c;
-  color: #3bba9c;
-}
-
-
-#header-in-nav {
-  font-family: "Courier New";
-  color: white;
-  font-size: 1.5rem;
-}
-#header-desc {
-  color: #3bba9c;
+  color: $primary-color;
 }

@@ -1,6 +1,6 @@
 ---
-path: '/java-nextLine-problem'
-date: '25 December 2020'
+path: '/java-nextline-problem'
+date: 'Dec 25, 2020'
 sortDate: 2020/12/25
 title: 'The Solution to the Scanner.nextLine Problem'
 author: 'Anwar Haredy'
@@ -38,9 +38,9 @@ This will force the first instance of nextLine to consume the additional
 The best solution in my opinion is to use `Scanner.nextLine()` to read every single input in your program. And then just parse as required.
 
 ```java{numberLines: true}
-int numberOfDays = Integer.parseInt(input.nextLine()) //For integers.
-double cost = Double.parseDouble(input.nextLine()) //For doubles.
-String fullName = input.nextLine() //For Strings
+int numberOfDays = Integer.parseInt(input.nextLine());
+double cost = Double.parseDouble(input.nextLine());
+String fullName = input.nextLine();
 
 //...and so on
 ```

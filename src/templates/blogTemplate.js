@@ -1,44 +1,26 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import './blogTemplate.css';
-import Header from '../components/Header';
-import 'katex/dist/katex.min.css';
 
-// import { defineCustomElements as deckDeckGoHighlightElement } from '@deckdeckgo/highlight-code/dist/loader';
-// deckDeckGoHighlightElement();
-
-export default function Template({ data, pageContext }) {
+const Template = ({ data, pageContext }) => {
   const post = data.markdownRemark;
-  const { title, author, date } = post.frontmatter;
-  const nextPost = pageContext.nextPost;
-  const prevPost = pageContext.prevPost;
+  const { title } = post.frontmatter;
 
   return (
-    <Layout>
-      <div className="blogPost">
-        <Header title="Blogs by Anwar" />
-        <div className="blogTemplate">
-          <h1 className="blogTemplate-title">{title}</h1>
-          <p className="blogTemplate-posted-by">
-            Posted by {author} on {date}
-          </p>
-          <div dangerouslySetInnerHTML={{ __html: post.html }} />
-          {nextPost && (
-            <Link to={nextPost} rel="next" id="nextPost">
-              Next Post →
-            </Link>
-          )}
-          {prevPost && (
-            <Link to={prevPost} rel="prev" id="prevPost">
-              ← Previous Post
-            </Link>
-          )}
+    <>
+      <Layout>
+        <div className="blogPost">
+          <div className="blogTemplate">
+            <h1 className="blogTemplate-title">{title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
-}
+};
+
+export default Template;
 
 export const postQuery = graphql`
   query BlogPost($path_variable: String!) {
@@ -54,11 +36,19 @@ export const postQuery = graphql`
   }
 `;
 
-export function Head() {
+export const Head = ({ data }) => {
+  const post = data.markdownRemark;
+  const { title, description, path } = post.frontmatter;
   return (
     <>
       <meta charSet="utf-8" />
-      <title>About!</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content="Programming, Graphics, Computer Science" />
+      <meta name="robots" content="index" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={`https://www.anwarellablog.me${path}`} />
+      <title>{title}</title>
     </>
   );
-}
+};

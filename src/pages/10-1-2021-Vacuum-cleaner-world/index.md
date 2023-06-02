@@ -1,10 +1,12 @@
 ---
 path: '/vacuum-cleaner-world'
-date: '10 January 2021'
+date: 'Jan 10, 2021'
 sortDate: 2021/1/10
 title: 'Vacuum Cleaner World'
 author: 'Anwar Haredy'
-description: 'How I tackled a simple problem with depth-first search.'
+description: 'I was reading Artificial Intelligence: A Modern Approach, an introductory book
+about the field of AI and its fundamentals and reached a certain programming exercise
+which I then tried to solve...'
 ---
 
 <h2>Introduction</h2>

@@ -1,10 +1,13 @@
 ---
 path: '/lights-on'
-date: '14 January 2021'
+date: 'Jan 14, 2021'
 sortDate: 2021/1/14
 title: 'Lights On'
 author: 'Anwar Haredy'
-description: 'A deceptively simple puzzle game.'
+description: 'I ran into this one puzzle game while playing a video game on my PC. It was part
+of a hidden room where you had to solve it to unlock the door leading to a boss fight.
+
+Upon first glance I had known it could be solved algorithmically...'
 ---
 
 <h2>Introduction</h2>

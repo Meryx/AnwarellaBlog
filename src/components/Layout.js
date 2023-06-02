@@ -1,16 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './layout.css';
+
+import Header from '@root/src/components/Header';
+import '@root/src/styles/main.scss';
 import 'katex/dist/katex.min.css';
 
 const Layout = ({ children }) => (
   <div className="layout">
-    <div className="main">{children}</div>
+    <Header />
+    {children}
   </div>
 );
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default Layout;

@@ -1,0 +1,46 @@
+.blogTemplate {
+  a {
+    color: $primary-color;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $primary-color-active;
+  }
+
+  ul {
+    font-size: 1.2rem;
+    font-family: serif !important;
+  }
+}
+
+.blogTemplate ul {
+  margin-bottom: 20px;
+}
+
+#nextPost,
+#prevPost {
+  background-color: black;
+  color: #ffffff;
+  padding: 16px 24px;
+  text-decoration: none;
+  margin-top: 50px;
+}
+
+#prevPost:hover,
+#nextPost:hover {
+  background-color: #3bba9c;
+  color: black;
+}
+
+#nextPost {
+  float: right;
+}
+
+#prevPost {
+  float: left;
+}
+
+.blogTemplate-title {
+  margin-bottom: 2rem;
+}
