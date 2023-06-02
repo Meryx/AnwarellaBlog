@@ -48,6 +48,7 @@ export const Head = ({ data }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={`https://www.anwarellablog.me${path}`} />
+      <link rel="icon" href="/images/favicon.ico" />
       <title>{title}</title>
     </>
   );

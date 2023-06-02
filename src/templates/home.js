@@ -71,6 +71,7 @@ export const Head = () => {
       <meta property="og:description" content="Programming, Computer Graphics, Grad School, by Anwar Haredy" />
       <meta property="og:image" content="https://www.example.com/image.jpg" />
       <meta property="og:url" content="https://www.anwarellablog.me" />
+      <link rel="icon" href="/images/favicon.ico" />
       <title>Anwar's Blog</title>
     </>
   );

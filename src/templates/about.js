@@ -51,6 +51,7 @@ export function Head() {
   return (
     <>
       <meta charSet="utf-8" />
+      <link rel="icon" href="/images/favicon.ico" />
       <title>About</title>
     </>
   );
