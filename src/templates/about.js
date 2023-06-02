@@ -13,7 +13,7 @@ const About = ({ data, pageContext }) => {
         <Body>
           <div className="row">
             <div className="col">
-              <StaticImage src="../pages/images/face.jpg" alt="Avatar" placeholder="blurred" imgClassName="portrait" />
+              <StaticImage src="../pages/images/face.jpg" alt="Avatar" placeholder="none" imgClassName="portrait" />
               <ul style={{ marginTop: 20 + 'px' }} className="network-icon">
                 <li>
                   <a href="https://twitter.com/Anwarella_">
