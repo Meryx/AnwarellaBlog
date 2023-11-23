@@ -1,0 +1,14 @@
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #43455c;
+    padding-top: 50px;
+}
+
+.victory-message {
+    height: 50px;
+    display: box;
+}

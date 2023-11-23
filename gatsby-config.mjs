@@ -1,5 +1,5 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -14,10 +14,12 @@ export default {
       resolve: `gatsby-plugin-alias-imports`,
       options: {
         alias: {
-          '@root': './',
-          '@components': './src/components',
+          "@root": "./",
+          "@components": "./src/components",
+          "@apps": "./src/apps",
+          "@shaders": "./src/shaders",
         },
-        extensions: ['js'],
+        extensions: ["js", "glsl"],
       },
     },
     {
@@ -47,15 +49,15 @@ export default {
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              classPrefix: 'language-',
+              classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
               showLineNumbers: false,
               noInlineHighlight: false,
               languageExtensions: [
                 {
-                  language: 'superscript',
-                  extend: 'javascript',
+                  language: "superscript",
+                  extend: "javascript",
                   definition: {
                     superscript_types: /(SuperType)/,
                   },
@@ -67,8 +69,8 @@ export default {
                 },
               ],
               prompt: {
-                user: 'root',
-                host: 'localhost',
+                user: "root",
+                host: "localhost",
                 global: false,
               },
               escapeEntities: {},
