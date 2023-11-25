@@ -7,6 +7,7 @@ var Reset;
 var Mode;
 var pxSize;
 var size;
+var linesNo = 8;
 
 pxSize = 168;
 size = 3;
@@ -204,7 +205,7 @@ const Main = async () => {
       6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
       3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
-    gl.drawArrays(gl.LINES, 0, 16);
+    gl.drawArrays(gl.LINES, 0, linesNo);
 
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
@@ -226,7 +227,7 @@ const Main = async () => {
           6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
           3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
         );
-        gl.drawArrays(gl.TRIANGLES, 0, 50);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
       }
     }
 
@@ -284,18 +285,21 @@ Mode = () => {
   console.log("hellooo");
   if (size === 3) {
     size = 4;
+    linesNo = 8;
     Main();
     return;
   }
 
   if (size === 4) {
     size = 5;
+    linesNo = 12;
     Main();
 
     return;
   }
   if (size === 5) {
     size = 3;
+    linesNo = 16;
     Main();
   }
 };
