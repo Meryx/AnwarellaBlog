@@ -285,21 +285,21 @@ Mode = () => {
   console.log("hellooo");
   if (size === 3) {
     size = 4;
-    linesNo = 8;
+    linesNo = 12;
     Main();
     return;
   }
 
   if (size === 4) {
     size = 5;
-    linesNo = 12;
+    linesNo = 16;
     Main();
 
     return;
   }
   if (size === 5) {
     size = 3;
-    linesNo = 16;
+    linesNo = 8;
     Main();
   }
 };
