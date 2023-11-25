@@ -1,5 +1,5 @@
-import React from 'react';
-import './Body.css';
+import React from "react";
+// import './Body.css';
 
 const Body = ({ children }) => {
   return <div className="container">{children}</div>;

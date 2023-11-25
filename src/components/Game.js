@@ -1,10 +1,21 @@
-import React, { useEffect } from "react";
-import { Main, Signal, Query } from "@apps/lights-on.js";
+import React, { useEffect, useRef } from "react";
+import { Main, Signal, Query, Reset, Mode } from "@apps/lights-on.js";
 
-const Game = ({ emit, victory }) => {
+const Game = ({ emit, victory, parentState, modeState }) => {
+  const isFirstRender = useRef(true);
   useEffect(() => {
     Main();
   }, []);
+  useEffect(() => {
+    Reset();
+  }, [parentState]);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    Mode();
+  }, [modeState]);
   const getPosition = (e) => {
     console.log("clicked");
     const canvas = e.target;

@@ -3,6 +3,13 @@ import fragmentShaderText from "@shaders/fragShader.js";
 
 var Signal;
 var Query;
+var Reset;
+var Mode;
+var pxSize;
+var size;
+
+pxSize = 168;
+size = 3;
 
 const Main = async () => {
   var canvas = document.getElementById("canvas");
@@ -63,86 +70,6 @@ const Main = async () => {
   gl.enable(gl.DEPTH_TEST);
   gl.depthFunc(gl.LESS);
 
-  //
-  // Create buffer
-  //
-
-  //   const color = [
-  //     1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-  //     1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-  //   ];
-
-  //   const lineBuffer = gl.createBuffer();
-  //   const colorBuffer = gl.createBuffer();
-  //   gl.bindBuffer(gl.ARRAY_BUFFER, lineBuffer);
-  //   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(lines), gl.STATIC_DRAW);
-
-  //   var positionAttribLocation = gl.getAttribLocation(program, "vertPosition");
-
-  //   gl.vertexAttribPointer(
-  //     positionAttribLocation, // Attribute location
-  //     2, // Number of elements per attribute
-  //     gl.FLOAT, // Type of elements
-  //     gl.FALSE,
-  //     0, // Size of an individual vertex
-  //     0 // Offset from the beginning of a single vertex to this attribute
-  //   );
-  //   gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-  //   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(color), gl.STATIC_DRAW);
-  //   var colorAttribLocation = gl.getAttribLocation(program, "vertColor");
-  //   gl.vertexAttribPointer(
-  //     colorAttribLocation, // Attribute location
-  //     3, // Number of elements per attribute
-  //     gl.FLOAT, // Type of elements
-  //     gl.FALSE,
-  //     0, // Size of an individual vertex
-  //     0 // Offset from the beginning of a single vertex to this attribute
-  //   );
-
-  //   var triangleVertices = [
-  //     // X, Y,       R, G, B
-  //     -1.0, 1.0, 0.231, 0.729, 0.612, -0.34, 1.0, 0.231, 0.729, 0.612, -1.0,
-  //     0.345, 0.231, 0.729, 0.612, -0.34, 1.0, 0.231, 0.729, 0.612, -0.34, 0.345,
-  //     0.231, 0.729, 0.612, -1.0, 0.345, 0.231, 0.729, 0.612,
-  //   ];
-
-  //   var triangleVertexBufferObject = gl.createBuffer();
-  //     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexBufferObject);
-  //     gl.bufferData(
-  //       gl.ARRAY_BUFFER,
-  //       new Float32Array(triangleVertices),
-  //       gl.STATIC_DRAW
-  //     );
-  //     gl.vertexAttribPointer(
-  //       positionAttribLocation, // Attribute location
-  //       2, // Number of elements per attribute
-  //       gl.FLOAT, // Type of elements
-  //       gl.FALSE,
-  //       5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
-  //       0 // Offset from the beginning of a single vertex to this attribute
-  //     );
-  //     gl.vertexAttribPointer(
-  //       colorAttribLocation, // Attribute location
-  //       3, // Number of elements per attribute
-  //       gl.FLOAT, // Type of elements
-  //       gl.FALSE,
-  //       5 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
-  //       2 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
-  //     );
-
-  //   gl.enableVertexAttribArray(positionAttribLocation);
-  //   gl.enableVertexAttribArray(colorAttribLocation);
-
-  //
-  // Main render loop
-  //
-
-  //   const lines = [
-  //     -0.329, 1.0, -0.329, -1.0, 0.341, 1.0, 0.341, -1.0, -1.0, -0.329, 1.0,
-  //     -0.329, -1.0, 0.341, 1.0, 0.341,
-  //   ];
-  const pxSize = 168;
-  const size = 3;
   const lines = [];
   for (let i = 1; i < size; i++) {
     const x = (i / size) * 2 - 1;
@@ -158,6 +85,8 @@ const Main = async () => {
     lines.push(1, y, 0);
     lines.push(1.0, 1.0, 1.0);
   }
+
+  console.log(lines);
 
   const lineBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, lineBuffer);
@@ -245,6 +174,13 @@ const Main = async () => {
     { length: arrSize },
     () => Math.random() > 0.5
   );
+
+  Reset = () => {
+    enabledTriangles = Array.from(
+      { length: arrSize },
+      () => Math.random() > 0.5
+    );
+  };
   //   console.log(array); // Outputs an array of size 10 with random true/false values
 
   const loop = () => {
@@ -268,7 +204,7 @@ const Main = async () => {
       6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
       3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
-    gl.drawArrays(gl.LINES, 0, 8);
+    gl.drawArrays(gl.LINES, 0, 16);
 
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
@@ -290,7 +226,7 @@ const Main = async () => {
           6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
           3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
         );
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        gl.drawArrays(gl.TRIANGLES, 0, 50);
       }
     }
 
@@ -340,7 +276,28 @@ const Main = async () => {
       return enabledTriangles.every((x) => x);
     };
   };
+
   requestAnimationFrame(loop);
 };
 
-export { Main, Signal, Query };
+Mode = () => {
+  console.log("hellooo");
+  if (size === 3) {
+    size = 4;
+    Main();
+    return;
+  }
+
+  if (size === 4) {
+    size = 5;
+    Main();
+
+    return;
+  }
+  if (size === 5) {
+    size = 3;
+    Main();
+  }
+};
+
+export { Main, Signal, Query, Reset, Mode };
