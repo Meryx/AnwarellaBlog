@@ -173,14 +173,58 @@ const Main = async () => {
   let arrSize = triangleVertices.length; // Size of the array
   let enabledTriangles = Array.from(
     { length: arrSize },
-    () => Math.random() > 0.5
+    () => Math.random() > 1.0
   );
+
+  const click = (rowNo, columnNo) => {
+    let normalized = rowNo * size + columnNo;
+    console.log(rowNo, columnNo);
+    enabledTriangles[normalized] = !enabledTriangles[normalized];
+    let modRow = rowNo + 1;
+    let modCol = columnNo;
+    normalized = modRow * size + modCol;
+    if (modRow > -1 && modCol > -1 && modRow < size && modCol < size)
+      enabledTriangles[normalized] = !enabledTriangles[normalized];
+
+    modRow = rowNo;
+    modCol = columnNo + 1;
+    normalized = modRow * size + modCol;
+    if (modRow > -1 && modCol > -1 && modRow < size && modCol < size)
+      enabledTriangles[normalized] = !enabledTriangles[normalized];
+
+    modRow = rowNo - 1;
+    modCol = columnNo;
+    normalized = modRow * size + modCol;
+    if (modRow > -1 && modCol > -1 && modRow < size && modCol < size)
+      enabledTriangles[normalized] = !enabledTriangles[normalized];
+
+    modRow = rowNo;
+    modCol = columnNo - 1;
+    normalized = modRow * size + modCol;
+    if (modRow > -1 && modCol > -1 && modRow < size && modCol < size)
+      enabledTriangles[normalized] = !enabledTriangles[normalized];
+  };
+
+  for (let i = 0; i < enabledTriangles.length; i++) {
+    if (Math.random() > 0.5) {
+      let rowNo = Math.floor(i / size);
+      let columnNo = i % size;
+      click(rowNo, columnNo);
+    }
+  }
 
   Reset = () => {
     enabledTriangles = Array.from(
       { length: arrSize },
-      () => Math.random() > 0.5
+      () => Math.random() > 1.0
     );
+    for (let i = 0; i < enabledTriangles.length; i++) {
+      if (Math.random() > 0.5) {
+        let rowNo = Math.floor(i / size);
+        let columnNo = i % size;
+        click(rowNo, columnNo);
+      }
+    }
   };
   //   console.log(array); // Outputs an array of size 10 with random true/false values
 
