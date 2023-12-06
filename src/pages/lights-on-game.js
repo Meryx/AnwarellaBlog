@@ -7,9 +7,10 @@ import "./lights-on-game.css";
 
 const LightsOn = () => {
   const [moves, setMoves] = useState(0);
-  const [victory, setVictory] = useState(false); // [victory, setVictory
+  const [victory, setVictory] = useState(false);
   const [parentState, setParentState] = useState(false);
   const [mode, setMode] = useState(0);
+  const [solveSignal, setSolveSignal] = useState(false);
   const incrementMoves = () => {
     setMoves(moves + 1);
   };
@@ -23,6 +24,10 @@ const LightsOn = () => {
   };
   const handleMode = () => {
     setMode((mode + 1) % 3);
+  };
+
+  const handleSolve = () => {
+    setSolveSignal(!solveSignal);
   };
   const modes = ["3x3", "4x4", "5x5"];
   return (
@@ -43,6 +48,7 @@ const LightsOn = () => {
           victory={declareVictory}
           parentState={parentState}
           modeState={mode}
+          solveSignal={solveSignal}
         />
         <p>Moves: {moves}</p>
       </div>
@@ -50,7 +56,9 @@ const LightsOn = () => {
         <Button callback={handleReset} className="flex-item" style="primary">
           Reset
         </Button>
-        <Button className="flex-item">Solve</Button>
+        <Button className="flex-item" callback={handleSolve}>
+          Solve
+        </Button>
         <Button callback={handleMode}>{modes[mode]}</Button>
       </div>
     </Layout>

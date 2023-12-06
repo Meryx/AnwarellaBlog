@@ -7,10 +7,67 @@ var Reset;
 var Mode;
 var pxSize;
 var size;
+var Solve;
 var linesNo = 8;
 
-pxSize = 168;
+pxSize = 300;
 size = 3;
+
+function gaussianEliminationMod2(matrix, vector) {
+  const size = matrix.length;
+
+  // Forward Elimination
+  for (let col = 0; col < size; col++) {
+    // Ensure the diagonal contains a 1
+    if (matrix[col][col] === 0) {
+      for (let row = col + 1; row < size; row++) {
+        if (matrix[row][col] === 1) {
+          // Swap rows in matrix
+          [matrix[col], matrix[row]] = [matrix[row], matrix[col]];
+          // Swap values in vector
+          [vector[col], vector[row]] = [vector[row], vector[col]];
+          break;
+        }
+      }
+    }
+
+    // Make all rows below this one 0 in current column
+    for (let row = col + 1; row < size; row++) {
+      if (matrix[row][col] === 1) {
+        for (let k = 0; k < size; k++) {
+          matrix[row][k] = (matrix[row][k] + matrix[col][k]) % 2;
+        }
+        vector[row] = (vector[row] + vector[col]) % 2;
+      }
+    }
+  }
+
+  // Backward Substitution
+  for (let col = size - 1; col >= 0; col--) {
+    for (let row = 0; row < col; row++) {
+      if (matrix[row][col] === 1) {
+        matrix[row][col] = (matrix[row][col] + matrix[col][col]) % 2;
+        vector[row] = (vector[row] + vector[col]) % 2;
+      }
+    }
+  }
+
+  return vector;
+}
+
+function transposeMatrix(vectorizedMatrix, size) {
+  let transposed = new Array(vectorizedMatrix.length);
+
+  for (let row = 0; row < size; row++) {
+    for (let col = 0; col < size; col++) {
+      // In the original matrix, index = col * size + row
+      // In the transposed matrix, index = row * size + col
+      transposed[row * size + col] = vectorizedMatrix[col * size + row];
+    }
+  }
+
+  return transposed;
+}
 
 const Main = async () => {
   var canvas = document.getElementById("canvas");
@@ -226,6 +283,58 @@ const Main = async () => {
       }
     }
   };
+
+  function convertColumnToRowMajor(vectorizedMatrix, size) {
+    let rowMajorMatrix = new Array(vectorizedMatrix.length);
+
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        // In the original column-major matrix, index = col * size + row
+        // In the new row-major matrix, index = row * size + col
+        rowMajorMatrix[row * size + col] = vectorizedMatrix[col * size + row];
+      }
+    }
+
+    return rowMajorMatrix;
+  }
+
+  function convertReversedColumnToRowMajor(vectorizedMatrix, size) {
+    let rowMajorMatrix = new Array(vectorizedMatrix.length);
+
+    for (let row = 0; row < size; row++) {
+      for (let col = 0; col < size; col++) {
+        // In the original reversed column-major matrix, index = col * size + (size - 1 - row)
+        // In the new row-major matrix, index = row * size + col
+        rowMajorMatrix[row * size + col] =
+          vectorizedMatrix[col * size + (size - 1 - row)];
+      }
+    }
+
+    return rowMajorMatrix;
+  }
+
+  Solve = () => {
+    const gameMatrix = enabledTriangles.map((x) => (x ? 0 : 1));
+    const movesMatrix3x3 = [
+      [1, 1, 0, 1, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 1, 0, 0, 0, 0],
+      [0, 1, 1, 0, 0, 1, 0, 0, 0],
+      [1, 0, 0, 1, 1, 0, 1, 0, 0],
+      [0, 1, 0, 1, 1, 1, 0, 1, 0],
+      [0, 0, 1, 0, 1, 1, 0, 0, 1],
+      [0, 0, 0, 1, 0, 0, 1, 1, 0],
+      [0, 0, 0, 0, 1, 0, 1, 1, 1],
+      [0, 0, 0, 0, 0, 1, 0, 1, 1],
+    ];
+    console.log(enabledTriangles);
+    console.log(gameMatrix);
+
+    const solution = gaussianEliminationMod2(
+      movesMatrix3x3,
+      convertReversedColumnToRowMajor(gameMatrix, 3)
+    );
+    console.log(solution);
+  };
   //   console.log(array); // Outputs an array of size 10 with random true/false values
 
   const loop = () => {
@@ -348,4 +457,4 @@ Mode = () => {
   }
 };
 
-export { Main, Signal, Query, Reset, Mode };
+export { Main, Signal, Query, Reset, Mode, Solve };

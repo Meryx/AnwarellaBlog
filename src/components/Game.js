@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { Main, Signal, Query, Reset, Mode } from "@apps/lights-on.js";
+import { Main, Signal, Query, Reset, Mode, Solve } from "@apps/lights-on.js";
 
-const Game = ({ emit, victory, parentState, modeState }) => {
+const Game = ({ emit, victory, parentState, modeState, solveSignal }) => {
   const isFirstRender = useRef(true);
+  const isFirstRenderSolve = useRef(true);
   useEffect(() => {
     Main();
   }, []);
@@ -16,6 +17,14 @@ const Game = ({ emit, victory, parentState, modeState }) => {
     }
     Mode();
   }, [modeState]);
+  useEffect(() => {
+    console.log(solveSignal);
+    if (isFirstRenderSolve.current) {
+      isFirstRenderSolve.current = false;
+      return;
+    }
+    Solve();
+  }, [solveSignal]);
   const getPosition = (e) => {
     console.log("clicked");
     const canvas = e.target;
@@ -31,7 +40,7 @@ const Game = ({ emit, victory, parentState, modeState }) => {
   };
   return (
     <>
-      <canvas id="canvas" width={168} height={168} onClick={getPosition} />
+      <canvas id="canvas" width={300} height={300} onClick={getPosition} />
     </>
   );
 };
