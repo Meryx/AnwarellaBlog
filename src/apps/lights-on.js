@@ -220,7 +220,44 @@ const Main = async () => {
       triangleVertices.push(triangles);
     }
   }
-  console.log(triangleVertices);
+
+  const dotsBuffer = [];
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      dotsBuffer.push(gl.createBuffer());
+    }
+  }
+
+  for (let i = 0; i < size; i++) {
+    for (let j = 0; j < size; j++) {
+      gl.bindBuffer(gl.ARRAY_BUFFER, dotsBuffer[i * size + j]);
+      const halfStep = 1 / size;
+      const step = (1 / size) * 2;
+      let x = (i / size) * 2 - 1 + halfStep;
+      let y = (j / size) * 2 - 1 + halfStep;
+      const dots = [];
+      dots.push(x, y, 2.0);
+      dots.push(1, 1, 1);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(dots), gl.STATIC_DRAW);
+      gl.vertexAttribPointer(
+        positionAttribLocation, // Attribute location
+        3, // Number of elements per attribute
+        gl.FLOAT, // Type of elements
+        gl.FALSE,
+        6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+        0 // Offset from the beginning of a single vertex to this attribute
+      );
+      gl.vertexAttribPointer(
+        colorAttribLocation, // Attribute location
+        3, // Number of elements per attribute
+        gl.FLOAT, // Type of elements
+        gl.FALSE,
+        6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+        3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
+      );
+    }
+  }
+
   //   gl.bindBuffer(gl.ARRAY_BUFFER, triangleBuffer);
   gl.enableVertexAttribArray(positionAttribLocation);
   gl.enableVertexAttribArray(colorAttribLocation);
@@ -232,6 +269,8 @@ const Main = async () => {
     { length: arrSize },
     () => Math.random() > 1.0
   );
+
+  let solveArray = Array.from({ length: arrSize }, () => false);
 
   const click = (rowNo, columnNo) => {
     let normalized = rowNo * size + columnNo;
@@ -298,6 +337,19 @@ const Main = async () => {
     return rowMajorMatrix;
   }
 
+  function toReverseColumnOrder(matrix) {
+    let size = Math.sqrt(matrix.length);
+    let newMatrix = [];
+
+    for (let row = 0; row < size; row++) {
+      for (let col = size - 1; col >= 0; col--) {
+        newMatrix.push(matrix[col * size + row]);
+      }
+    }
+
+    return newMatrix;
+  }
+
   function convertReversedColumnToRowMajor(vectorizedMatrix, size) {
     let rowMajorMatrix = new Array(vectorizedMatrix.length);
 
@@ -326,14 +378,147 @@ const Main = async () => {
       [0, 0, 0, 0, 1, 0, 1, 1, 1],
       [0, 0, 0, 0, 0, 1, 0, 1, 1],
     ];
-    console.log(enabledTriangles);
-    console.log(gameMatrix);
+
+    const movesMatrix4x4 = [
+      [1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1],
+      [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
+    ];
+
+    const movesMatrix5x5 = [
+      [
+        1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0,
+        1,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1,
+        0,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1,
+        1,
+      ],
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1,
+        1,
+      ],
+    ];
+
+    let movesMatrix;
+
+    if (size == 3) {
+      movesMatrix = movesMatrix3x3;
+    } else if (size == 4) {
+      movesMatrix = movesMatrix4x4;
+    } else {
+      movesMatrix = movesMatrix5x5;
+    }
 
     const solution = gaussianEliminationMod2(
-      movesMatrix3x3,
-      convertReversedColumnToRowMajor(gameMatrix, 3)
+      movesMatrix,
+      convertReversedColumnToRowMajor(gameMatrix, size)
     );
-    console.log(solution);
+    solveArray = toReverseColumnOrder(solution).map((x) =>
+      x === 1 ? true : false
+    );
+    console.log(toReverseColumnOrder(solution));
   };
   //   console.log(array); // Outputs an array of size 10 with random true/false values
 
@@ -359,6 +544,30 @@ const Main = async () => {
       3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
     );
     gl.drawArrays(gl.LINES, 0, linesNo);
+
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        if (!solveArray[i * size + j]) continue;
+        gl.bindBuffer(gl.ARRAY_BUFFER, dotsBuffer[i * size + j]);
+        gl.vertexAttribPointer(
+          positionAttribLocation, // Attribute location
+          3, // Number of elements per attribute
+          gl.FLOAT, // Type of elements
+          gl.FALSE,
+          6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+          0 // Offset from the beginning of a single vertex to this attribute
+        );
+        gl.vertexAttribPointer(
+          colorAttribLocation, // Attribute location
+          3, // Number of elements per attribute
+          gl.FLOAT, // Type of elements
+          gl.FALSE,
+          6 * Float32Array.BYTES_PER_ELEMENT, // Size of an individual vertex
+          3 * Float32Array.BYTES_PER_ELEMENT // Offset from the beginning of a single vertex to this attribute
+        );
+        gl.drawArrays(gl.POINTS, 0, 1);
+      }
+    }
 
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
