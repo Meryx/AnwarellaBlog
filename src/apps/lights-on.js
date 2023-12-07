@@ -608,6 +608,7 @@ const Main = async () => {
       let normalized = rowNo * size + columnNo;
       console.log(rowNo, columnNo);
       enabledTriangles[normalized] = !enabledTriangles[normalized];
+      solveArray[normalized] = false;
 
       let modRow = rowNo + 1;
       let modCol = columnNo;
