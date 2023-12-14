@@ -1,0 +1,27 @@
+#prev, #next {
+    background-color: black;
+        color: #ffffff;
+        padding: 16px 24px;
+        text-decoration: none;
+        margin-top: 50px;
+        width: 140px;
+        text-align: center;
+        @media (max-width: 992px) {
+                width: auto;
+            }
+}
+
+#prev:hover,
+#next:hover {
+    background-color: #3bba9c;
+    color: black;
+}
+
+#prev {
+    margin-left: auto;
+    @media (max-width: 992px) {
+            width: auto;
+            margin-left: 0;
+        }
+}
+
