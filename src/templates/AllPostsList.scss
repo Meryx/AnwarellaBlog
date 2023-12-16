@@ -1,0 +1,24 @@
+.all-posts-list-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    a:hover {
+        color: #3bba9c;
+    }
+
+        @media (max-width: 992px) {
+
+        flex-direction: column; 
+           }
+}
+
+@media (max-width: 992px) {
+
+    .container {
+        padding: 0 !important;
+    }
+}
