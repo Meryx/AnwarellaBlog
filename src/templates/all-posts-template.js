@@ -8,7 +8,7 @@ const AllPosts = ({ pageContext }) => {
   return (
     <Layout>
       <IconContext.Provider value={{ size: "2em" }}>
-        <Body>
+        <div className="container container-list">
           <div className="all-posts">
             <h1 className="all-posts-title">All Posts</h1>
             <div className="all-posts-list">
@@ -25,7 +25,7 @@ const AllPosts = ({ pageContext }) => {
               ))}
             </div>
           </div>
-        </Body>
+        </div>
       </IconContext.Provider>
     </Layout>
   );
