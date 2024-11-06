@@ -55,20 +55,6 @@ function gaussianEliminationMod2(matrix, vector) {
   return vector;
 }
 
-function transposeMatrix(vectorizedMatrix, size) {
-  let transposed = new Array(vectorizedMatrix.length);
-
-  for (let row = 0; row < size; row++) {
-    for (let col = 0; col < size; col++) {
-      // In the original matrix, index = col * size + row
-      // In the transposed matrix, index = row * size + col
-      transposed[row * size + col] = vectorizedMatrix[col * size + row];
-    }
-  }
-
-  return transposed;
-}
-
 const Main = async () => {
   var canvas = document.getElementById("canvas");
   var gl = canvas.getContext("webgl");
@@ -180,7 +166,6 @@ const Main = async () => {
       gl.bindBuffer(gl.ARRAY_BUFFER, triangleBuffers[i * size + j]);
       let x = (i / size) * 2 - 1;
       let y = (j / size) * 2 - 1;
-      const offset = 2 / (pxSize - 1);
       const step = (1 / size) * 2;
 
       const triangles = [];
@@ -232,7 +217,6 @@ const Main = async () => {
     for (let j = 0; j < size; j++) {
       gl.bindBuffer(gl.ARRAY_BUFFER, dotsBuffer[i * size + j]);
       const halfStep = 1 / size;
-      const step = (1 / size) * 2;
       let x = (i / size) * 2 - 1 + halfStep;
       let y = (j / size) * 2 - 1 + halfStep;
       const dots = [];
@@ -322,20 +306,6 @@ const Main = async () => {
       }
     }
   };
-
-  function convertColumnToRowMajor(vectorizedMatrix, size) {
-    let rowMajorMatrix = new Array(vectorizedMatrix.length);
-
-    for (let row = 0; row < size; row++) {
-      for (let col = 0; col < size; col++) {
-        // In the original column-major matrix, index = col * size + row
-        // In the new row-major matrix, index = row * size + col
-        rowMajorMatrix[row * size + col] = vectorizedMatrix[col * size + row];
-      }
-    }
-
-    return rowMajorMatrix;
-  }
 
   function toReverseColumnOrder(matrix) {
     let size = Math.sqrt(matrix.length);
@@ -503,9 +473,9 @@ const Main = async () => {
 
     let movesMatrix;
 
-    if (size == 3) {
+    if (size === 3) {
       movesMatrix = movesMatrix3x3;
-    } else if (size == 4) {
+    } else if (size === 4) {
       movesMatrix = movesMatrix4x4;
     } else {
       movesMatrix = movesMatrix5x5;
