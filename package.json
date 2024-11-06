@@ -3,7 +3,7 @@
   "private": true,
   "description": "Private Blog",
   "version": "0.1.0",
-  "author": "Anwar Haredy <anwar.haredy@kaust.edu.sa>",
+  "author": "Anwar Haredy <CSAnwar.haredy@gmail.com>",
   "dependencies": {
     "gatsby": "^5.0.0",
     "gatsby-plugin-alias-imports": "^1.0.5",
